@@ -244,25 +244,6 @@ summary(lm(pct_chg_mon_f ~ fire_cat + Rural_Dummy_R +  week*fire_cat, data = pct
 
 
 
-
-
-##  read up on arima or other time series regression and forecasting to work on
-
-
-## FD Model
-
-```{r}
-library(quantreg)
-```
-
-
-```{r}
-r1 <- rq(formula = pct_chg_mon_f ~ Pct_Agg_P + Rural_Dummy_R, tau = 0.75, 
-   data=subset(pct_chg_aug, fire_cat=="GF"))
-
-summary(r1)
-```
-
 -- data 2018 - 2020 
 -- look into time series model
 
