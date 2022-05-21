@@ -1,0 +1,312 @@
+--------------------------------------------------------------------------------
+Codebook for NHGIS data file 'nhgis0011_ds245_20195_zcta'
+--------------------------------------------------------------------------------
+ 
+Contents
+    - Data Summary
+    - Data Dictionary
+    - Citation and Use
+ 
+Additional documentation on NHGIS data sources is available at: 
+    https://www.nhgis.org/documentation/tabular-data 
+ 
+--------------------------------------------------------------------------------
+Data Summary
+--------------------------------------------------------------------------------
+ 
+Year:             2015-2019
+Geographic level: 5-Digit ZIP Code Tabulation Area
+Dataset:          2019 American Community Survey: 5-Year Data [2015-2019, Tracts & Larger Areas]
+   NHGIS code:    2015_2019_ACS5b
+   NHGIS ID:      ds245
+Breakdown(s):     Geographic Subarea:
+                     Total area (00)
+Data type(s):     (E) Estimates
+                  (M) Margins of error
+ 
+Tables:
+ 
+1. Industry by Class of Worker for the Civilian Employed Population 16 Years and Over
+   Universe:    Civilian employed population 16 years and over
+   Source code: C24070
+   NHGIS code:  AMHT
+ 
+--------------------------------------------------------------------------------
+Data Dictionary
+--------------------------------------------------------------------------------
+ 
+Context Fields 
+        GISJOIN:     GIS Join Match Code
+        YEAR:        Data File Year
+        STUSAB:      State Postal Abbreviation
+        REGIONA:     Region Code
+        DIVISIONA:   Division Code
+        STATEA:      State Code
+        COUNTYA:     County Code
+        COUSUBA:     County Subdivision Code
+        PLACEA:      Place Code
+        TRACTA:      Census Tract Code
+        CONCITA:     Consolidated City Code
+        AIANHHA:     American Indian Area/Alaska Native Area/Hawaiian Home Land Code
+        RES_ONLYA:   American Indian Area/Alaska Native Area (Reservation or Statistical Entity Only) Code
+        TRUSTA:      American Indian Area (Off-Reservation Trust Land Only)/Hawaiian Home Land Code
+        AIHHTLI:     American Indian Trust Land/ Hawaiian Home Land Indicator
+        AITS:        American Indian Tribal Subdivision (FIPS)
+        ANRCA:       Alaska Native Regional Corporation Code
+        CBSAA:       Metropolitan Statistical Area/Micropolitan Statistical Area Code
+        CSAA:        Combined Statistical Area Code
+        METDIVA:     Metropolitan Division Code
+        MEMI:        Metropolitan/Micropolitan Indicator Flag
+        NECTAA:      New England City and Town Area Code
+        CNECTAA:     Combined New England City and Town Area Code
+        NECTADIVA:   New England City and Town Area Division Code
+        UAA:         Urban Area Code
+        CDCURRA:     Congressional District (2019-2021, 116th Congress) Code
+        SLDUA:       State Legislative District (Upper Chamber) Code
+        SLDLA:       State Legislative District (Lower Chamber) Code
+        ZCTA5A:      5-Digit ZIP Code Tabulation Area Code
+        SUBMCDA:     Subminor Civil Division Code
+        SDELMA:      School District (Elementary)/Remainder Code
+        SDSECA:      School District (Secondary)/Remainder Code
+        SDUNIA:      School District (Unified)/Remainder Code
+        UR:          Urban/Rural
+        PCI:         Principal City Indicator
+        PUMA5A:      Public Use Microdata Sample Area (PUMA) Code
+        GEOID:       Census Geographic Identifier
+        BTTRA:       Tribal Census Tract Code
+ 
+Data Type (E):
+    Estimates
+ 
+        NAME_E:      Area Name
+ 
+    Table 1:     Industry by Class of Worker for the Civilian Employed Population 16 Years and Over
+    Universe:    Civilian employed population 16 years and over
+    Source code: C24070
+    NHGIS code:  AMHT
+        AMHTE001:    Total
+        AMHTE002:    Agriculture, forestry, fishing and hunting, and mining
+        AMHTE003:    Construction
+        AMHTE004:    Manufacturing
+        AMHTE005:    Wholesale trade
+        AMHTE006:    Retail trade
+        AMHTE007:    Transportation and warehousing, and utilities
+        AMHTE008:    Information
+        AMHTE009:    Finance and insurance, and real estate, and rental and leasing
+        AMHTE010:    Professional, scientific, and management, and administrative, and waste management services
+        AMHTE011:    Educational services, and health care and social assistance
+        AMHTE012:    Arts, entertainment, and recreation, and accommodation and food services
+        AMHTE013:    Other services, except public administration
+        AMHTE014:    Public administration
+        AMHTE015:    Employee of private company workers
+        AMHTE016:    Employee of private company workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTE017:    Employee of private company workers: Construction
+        AMHTE018:    Employee of private company workers: Manufacturing
+        AMHTE019:    Employee of private company workers: Wholesale trade
+        AMHTE020:    Employee of private company workers: Retail trade
+        AMHTE021:    Employee of private company workers: Transportation and warehousing, and utilities
+        AMHTE022:    Employee of private company workers: Information
+        AMHTE023:    Employee of private company workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTE024:    Employee of private company workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTE025:    Employee of private company workers: Educational services, and health care and social assistance
+        AMHTE026:    Employee of private company workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTE027:    Employee of private company workers: Other services, except public administration
+        AMHTE028:    Employee of private company workers: Public administration
+        AMHTE029:    Self-employed in own incorporated business workers
+        AMHTE030:    Self-employed in own incorporated business workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTE031:    Self-employed in own incorporated business workers: Construction
+        AMHTE032:    Self-employed in own incorporated business workers: Manufacturing
+        AMHTE033:    Self-employed in own incorporated business workers: Wholesale trade
+        AMHTE034:    Self-employed in own incorporated business workers: Retail trade
+        AMHTE035:    Self-employed in own incorporated business workers: Transportation and warehousing, and utilities
+        AMHTE036:    Self-employed in own incorporated business workers: Information
+        AMHTE037:    Self-employed in own incorporated business workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTE038:    Self-employed in own incorporated business workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTE039:    Self-employed in own incorporated business workers: Educational services, and health care and social assistance
+        AMHTE040:    Self-employed in own incorporated business workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTE041:    Self-employed in own incorporated business workers: Other services, except public administration
+        AMHTE042:    Self-employed in own incorporated business workers: Public administration
+        AMHTE043:    Private not-for-profit wage and salary workers
+        AMHTE044:    Private not-for-profit wage and salary workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTE045:    Private not-for-profit wage and salary workers: Construction
+        AMHTE046:    Private not-for-profit wage and salary workers: Manufacturing
+        AMHTE047:    Private not-for-profit wage and salary workers: Wholesale trade
+        AMHTE048:    Private not-for-profit wage and salary workers: Retail trade
+        AMHTE049:    Private not-for-profit wage and salary workers: Transportation and warehousing, and utilities
+        AMHTE050:    Private not-for-profit wage and salary workers: Information
+        AMHTE051:    Private not-for-profit wage and salary workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTE052:    Private not-for-profit wage and salary workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTE053:    Private not-for-profit wage and salary workers: Educational services, and health care and social assistance
+        AMHTE054:    Private not-for-profit wage and salary workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTE055:    Private not-for-profit wage and salary workers: Other services, except public administration
+        AMHTE056:    Private not-for-profit wage and salary workers: Public administration
+        AMHTE057:    Local, state, and federal government workers
+        AMHTE058:    Local, state, and federal government workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTE059:    Local, state, and federal government workers: Construction
+        AMHTE060:    Local, state, and federal government workers: Manufacturing
+        AMHTE061:    Local, state, and federal government workers: Wholesale trade
+        AMHTE062:    Local, state, and federal government workers: Retail trade
+        AMHTE063:    Local, state, and federal government workers: Transportation and warehousing, and utilities
+        AMHTE064:    Local, state, and federal government workers: Information
+        AMHTE065:    Local, state, and federal government workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTE066:    Local, state, and federal government workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTE067:    Local, state, and federal government workers: Educational services, and health care and social assistance
+        AMHTE068:    Local, state, and federal government workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTE069:    Local, state, and federal government workers: Other services, except public administration
+        AMHTE070:    Local, state, and federal government workers: Public administration
+        AMHTE071:    Self-employed in own not incorporated business workers and unpaid family workers
+        AMHTE072:    Self-employed in own not incorporated business workers and unpaid family workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTE073:    Self-employed in own not incorporated business workers and unpaid family workers: Construction
+        AMHTE074:    Self-employed in own not incorporated business workers and unpaid family workers: Manufacturing
+        AMHTE075:    Self-employed in own not incorporated business workers and unpaid family workers: Wholesale trade
+        AMHTE076:    Self-employed in own not incorporated business workers and unpaid family workers: Retail trade
+        AMHTE077:    Self-employed in own not incorporated business workers and unpaid family workers: Transportation and warehousing, and utilities
+        AMHTE078:    Self-employed in own not incorporated business workers and unpaid family workers: Information
+        AMHTE079:    Self-employed in own not incorporated business workers and unpaid family workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTE080:    Self-employed in own not incorporated business workers and unpaid family workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTE081:    Self-employed in own not incorporated business workers and unpaid family workers: Educational services, and health care and social assistance
+        AMHTE082:    Self-employed in own not incorporated business workers and unpaid family workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTE083:    Self-employed in own not incorporated business workers and unpaid family workers: Other services, except public administration
+        AMHTE084:    Self-employed in own not incorporated business workers and unpaid family workers: Public administration
+ 
+Data Type (M):
+    Margins of error
+ 
+        NAME_M:      Area Name
+ 
+    Table 1:     Industry by Class of Worker for the Civilian Employed Population 16 Years and Over
+    Universe:    Civilian employed population 16 years and over
+    Source code: C24070
+    NHGIS code:  AMHT
+        AMHTM001:    Total
+        AMHTM002:    Agriculture, forestry, fishing and hunting, and mining
+        AMHTM003:    Construction
+        AMHTM004:    Manufacturing
+        AMHTM005:    Wholesale trade
+        AMHTM006:    Retail trade
+        AMHTM007:    Transportation and warehousing, and utilities
+        AMHTM008:    Information
+        AMHTM009:    Finance and insurance, and real estate, and rental and leasing
+        AMHTM010:    Professional, scientific, and management, and administrative, and waste management services
+        AMHTM011:    Educational services, and health care and social assistance
+        AMHTM012:    Arts, entertainment, and recreation, and accommodation and food services
+        AMHTM013:    Other services, except public administration
+        AMHTM014:    Public administration
+        AMHTM015:    Employee of private company workers
+        AMHTM016:    Employee of private company workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTM017:    Employee of private company workers: Construction
+        AMHTM018:    Employee of private company workers: Manufacturing
+        AMHTM019:    Employee of private company workers: Wholesale trade
+        AMHTM020:    Employee of private company workers: Retail trade
+        AMHTM021:    Employee of private company workers: Transportation and warehousing, and utilities
+        AMHTM022:    Employee of private company workers: Information
+        AMHTM023:    Employee of private company workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTM024:    Employee of private company workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTM025:    Employee of private company workers: Educational services, and health care and social assistance
+        AMHTM026:    Employee of private company workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTM027:    Employee of private company workers: Other services, except public administration
+        AMHTM028:    Employee of private company workers: Public administration
+        AMHTM029:    Self-employed in own incorporated business workers
+        AMHTM030:    Self-employed in own incorporated business workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTM031:    Self-employed in own incorporated business workers: Construction
+        AMHTM032:    Self-employed in own incorporated business workers: Manufacturing
+        AMHTM033:    Self-employed in own incorporated business workers: Wholesale trade
+        AMHTM034:    Self-employed in own incorporated business workers: Retail trade
+        AMHTM035:    Self-employed in own incorporated business workers: Transportation and warehousing, and utilities
+        AMHTM036:    Self-employed in own incorporated business workers: Information
+        AMHTM037:    Self-employed in own incorporated business workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTM038:    Self-employed in own incorporated business workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTM039:    Self-employed in own incorporated business workers: Educational services, and health care and social assistance
+        AMHTM040:    Self-employed in own incorporated business workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTM041:    Self-employed in own incorporated business workers: Other services, except public administration
+        AMHTM042:    Self-employed in own incorporated business workers: Public administration
+        AMHTM043:    Private not-for-profit wage and salary workers
+        AMHTM044:    Private not-for-profit wage and salary workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTM045:    Private not-for-profit wage and salary workers: Construction
+        AMHTM046:    Private not-for-profit wage and salary workers: Manufacturing
+        AMHTM047:    Private not-for-profit wage and salary workers: Wholesale trade
+        AMHTM048:    Private not-for-profit wage and salary workers: Retail trade
+        AMHTM049:    Private not-for-profit wage and salary workers: Transportation and warehousing, and utilities
+        AMHTM050:    Private not-for-profit wage and salary workers: Information
+        AMHTM051:    Private not-for-profit wage and salary workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTM052:    Private not-for-profit wage and salary workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTM053:    Private not-for-profit wage and salary workers: Educational services, and health care and social assistance
+        AMHTM054:    Private not-for-profit wage and salary workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTM055:    Private not-for-profit wage and salary workers: Other services, except public administration
+        AMHTM056:    Private not-for-profit wage and salary workers: Public administration
+        AMHTM057:    Local, state, and federal government workers
+        AMHTM058:    Local, state, and federal government workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTM059:    Local, state, and federal government workers: Construction
+        AMHTM060:    Local, state, and federal government workers: Manufacturing
+        AMHTM061:    Local, state, and federal government workers: Wholesale trade
+        AMHTM062:    Local, state, and federal government workers: Retail trade
+        AMHTM063:    Local, state, and federal government workers: Transportation and warehousing, and utilities
+        AMHTM064:    Local, state, and federal government workers: Information
+        AMHTM065:    Local, state, and federal government workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTM066:    Local, state, and federal government workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTM067:    Local, state, and federal government workers: Educational services, and health care and social assistance
+        AMHTM068:    Local, state, and federal government workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTM069:    Local, state, and federal government workers: Other services, except public administration
+        AMHTM070:    Local, state, and federal government workers: Public administration
+        AMHTM071:    Self-employed in own not incorporated business workers and unpaid family workers
+        AMHTM072:    Self-employed in own not incorporated business workers and unpaid family workers: Agriculture, forestry, fishing and hunting, and mining
+        AMHTM073:    Self-employed in own not incorporated business workers and unpaid family workers: Construction
+        AMHTM074:    Self-employed in own not incorporated business workers and unpaid family workers: Manufacturing
+        AMHTM075:    Self-employed in own not incorporated business workers and unpaid family workers: Wholesale trade
+        AMHTM076:    Self-employed in own not incorporated business workers and unpaid family workers: Retail trade
+        AMHTM077:    Self-employed in own not incorporated business workers and unpaid family workers: Transportation and warehousing, and utilities
+        AMHTM078:    Self-employed in own not incorporated business workers and unpaid family workers: Information
+        AMHTM079:    Self-employed in own not incorporated business workers and unpaid family workers: Finance and insurance, and real estate, and rental and leasing
+        AMHTM080:    Self-employed in own not incorporated business workers and unpaid family workers: Professional, scientific, and management, and administrative, and waste management services
+        AMHTM081:    Self-employed in own not incorporated business workers and unpaid family workers: Educational services, and health care and social assistance
+        AMHTM082:    Self-employed in own not incorporated business workers and unpaid family workers: Arts, entertainment, and recreation, and accommodation and food services
+        AMHTM083:    Self-employed in own not incorporated business workers and unpaid family workers: Other services, except public administration
+        AMHTM084:    Self-employed in own not incorporated business workers and unpaid family workers: Public administration
+ 
+--------------------------------------------------------------------------------
+Citation and Use of NHGIS Data
+--------------------------------------------------------------------------------
+ 
+All persons are granted a limited license to use this documentation and the
+accompanying data, subject to the following conditions:
+
+* REDISTRIBUTION: You will not redistribute the data without permission.
+
+  You may publish a subset of the data to meet journal requirements for accessing 
+  data related to a particular publication. Contact us for permission for any other 
+  redistribution; we will consider requests for free and commercial redistribution.
+
+* CITATION: You will cite NHGIS appropriately.
+
+    * Publications and research reports employing NHGIS data (either tabular or GIS) 
+      should include the following citation:
+
+        Steven Manson, Jonathan Schroeder, David Van Riper, Tracy Kugler, and Steven Ruggles. 
+        IPUMS National Historical Geographic Information System: Version 16.0 
+        [dataset]. Minneapolis, MN: IPUMS. 2021. 
+        http://doi.org/10.18128/D050.V16.0
+
+    * For policy briefs, online resources, or articles in the popular press, we 
+      recommend that you cite the use of NHGIS data as follows:
+
+        IPUMS NHGIS, University of Minnesota, www.nhgis.org.
+
+These terms of use are a legally binding agreement. You can use the data only in 
+accordance with these terms, and any other use is a violation of the agreement. 
+Violations may result in revocation of the agreement and prohibition from using other 
+IPUMS data. If IPUMS or our partners are harmed from your violation, you are 
+responsible for all damages, including reasonable attorney's fees and expenses.
+        
+In addition, we request that users send us a copy of any publications, research
+reports, or educational material making use of the data or documentation.
+
+Send electronic material to: nhgis@umn.edu
+
+Printed matter should be sent to:
+
+    IPUMS NHGIS
+    Institute for Social Research and Data Innovation
+    University of Minnesota
+    50 Willey Hall
+    225 19th Ave S
+    Minneapolis, MN 55455
