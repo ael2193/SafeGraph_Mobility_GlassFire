@@ -10,11 +10,12 @@ library(zipzcta)
 library(lubridate)
 library(plotly)
 library(ipumsr)
+library(png)
 
 ################################################################################################
 # SET WORKING DIRECTORY 
 ## #############################################################################################
-setwd("/Volumes/22/QMSS RA")
+setwd("/Volumes/22/SafeGraph_Mobility_GlassFire/QMSS RA")
 
 ################################################################################################
 # READ IN DATA
@@ -49,6 +50,13 @@ gfperimvec <- as.vector(glass_perim$ZCTA)
 buffer1_vec <- as.vector(buffer_perim$ZCTA_2)
 buffer2_vec <- as.vector(buffer2$ZCTA)
 buffer2_perim_vec <- as.vector(buffer2_perim$ZCTA)
+
+
+################################################################################################
+# READ IN IMAGES
+## #############################################################################################
+pp1 <- readPNG("California_Map.png")
+pp2 <- readPNG("Cali_Map_Zoom.png")
 
 
 ################################################################################################

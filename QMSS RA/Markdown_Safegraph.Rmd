@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r, message = FALSE}
-source("April26_Ipums.R")
+source("Safegraph_Script.R")
 ```
 
 ```{r}
@@ -20,7 +20,19 @@ rm(list=ls()[! ls() %in% c("rural_ipums","ruca", "subset_glass",
                            "industry_ipums", "aug_combined", 
                            "buffer1_vec","buffer2_perim_vec", 
                            "buffer2_vec", "cf_bf1", "cf_bf2", "gfperimvec",
-                           "not_zcta", "rural_ruca", "zcta_cali", '%notin%')])
+                           "not_zcta", "rural_ruca", "zcta_cali", '%notin%', 'pp1', 'pp2')])
+```
+
+## Read in Images
+```{r}
+plot.new() 
+rasterImage(pp1,0,0,1,1)
+```
+
+
+```{r}
+plot.new() 
+rasterImage(pp2,0,0,1,1)
 ```
 
 ## pct change by zip code - zip code specific plots 
