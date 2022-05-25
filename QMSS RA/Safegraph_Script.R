@@ -97,6 +97,7 @@ june_alt <- june_alt %>%
 
 ## Find ZCTA That is not in August/June Data
 not_zcta <- setdiff(august$zcta,buffer2_perim$ZCTA)
+not_zcta <- append(not_zcta, 93012)
 
 ## Create Not in Function (Opposite of %in%)
 `%notin%` <- Negate(`%in%`)
@@ -115,7 +116,8 @@ august <- august %>%
                               TRUE ~ 'GF')) %>%
   mutate(date_range_start = as.POSIXct(strptime(date_range_start, "%Y-%m-%d"))) %>%
   mutate(date_range_end = as.POSIXct(strptime(date_range_end, "%Y-%m-%d"))) %>%
-  filter(date_range_start != "2020-08-17")
+  filter(date_range_start != "2020-08-17") %>%
+  mutate(june = case_when(TRUE ~ 'August'))
 
 
 ## Categorize by BF2, BF1, GF by ZCTA Vector
@@ -125,7 +127,11 @@ june_alt <- june_alt %>%
                               TRUE ~ 'GF')) %>%
   mutate(date_range_start = as.POSIXct(strptime(date_range_start, "%Y-%m-%d"))) %>%
   mutate(date_range_end = as.POSIXct(strptime(date_range_end, "%Y-%m-%d"))) %>%
-  filter(date_range_start != "2020-08-17")
+  filter(date_range_start != "2020-08-17") %>%
+  mutate(june = case_when(TRUE ~ 'June'))
+
+## RBIND August and June_Alt
+com <- bind_rows(august, june_alt)
 
 ## Create Baseline Data-set (June) by Individual ZCTA (Not used in EDA)
 june_pct_base_zcta <- june_alt %>%
@@ -206,11 +212,11 @@ ruca <- ruca %>%
   select(zcta, Rural_Dummy_R)
 
 ## Join into August Data
-aug_combined <- aug_combined %>%
+aug_ex <- aug_combined %>%
   inner_join(., ruca, by = c("zcta" = "zcta")) 
 
 ## Create Percent Change Dataset in August Relative to June
-pct_chg_aug <- aug_combined %>%
+pct_chg_aug <- aug_ex %>%
   mutate(week = as.POSIXct(strptime(date_range_start, "%Y-%m-%d"))) %>%
   mutate(week = as_date(week)) %>%
   group_by(zcta, week, Rural_Dummy_I,Rural_Dummy_R, fire_cat, pct_chg_june_z, pct_chg_june_f) %>%
