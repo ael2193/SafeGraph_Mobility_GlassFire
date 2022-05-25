@@ -96,7 +96,7 @@ june_alt <- june_alt %>%
   inner_join(., zipzcta, by = c("postal_code" = "zip"))
 
 ## Find ZCTA That is not in August/June Data
-not_zcta <- setdiff(august$zcta,buffer2_perim$ZCTA)
+not_zcta <- setdiff(august$zcta,buffer2_perim_vec)
 not_zcta <- append(not_zcta, 93012)
 
 ## Create Not in Function (Opposite of %in%)
@@ -104,10 +104,10 @@ not_zcta <- append(not_zcta, 93012)
 
 ## Filter out Observations with ZCTA Not in BF1, BF2, GF (June + August)
 august <- august %>%
-  filter(zcta %notin% not_zcta)
+  filter(zcta %in% buffer2_perim_vec)
 
 june_alt <- june_alt %>%
-  filter(zcta %notin% not_zcta)
+  filter(zcta %in% buffer2_perim_vec)
 
 ## Categorize by BF2, BF1, GF by ZCTA Vector
 august <- august %>%
@@ -205,6 +205,7 @@ rural_ruca <- c(4.0, 4.2, 5.0, 5.2, 6.0, 6.1, 7.0, 7.2, 7.3,
                 10.2, 10.3, 10.4, 10.5,10.6)
 
 ruca <- ruca %>%
+  filter(zcta %in% buffer2_perim_vec) %>%
   mutate(Rural_Dummy_R = case_when(RUCA2 %in% rural_ruca ~ 'Rural', TRUE ~ 'Urban')) 
 
 
@@ -245,7 +246,7 @@ glass <- glass %>%
 
 ## Subset Glass by ZCTA and by Date 
 subset_glass <- glass %>%
-  filter(zcta %notin% not_zcta) %>%
+  filter(zcta %in% buffer2_perim_vec) %>%
   filter(date >= '2020-06-22' & date <= '2020-10-12')
 
 
@@ -256,7 +257,7 @@ subset_glass <- glass %>%
 poverty_ipums <- read_csv("data/poverty_ipums_2015_2019/poverty_zcta.csv")
 
 ## ZCTA Unique to California
-zcta_cali <- as.vector(unique(pct_chg_aug$zcta))
+#zcta_cali <- as.vector(unique(pct_chg_aug$zcta))
 
 ## Mutate Variables to Categorize by Quartile 
 
@@ -264,7 +265,7 @@ zcta_cali <- as.vector(unique(pct_chg_aug$zcta))
 
 poverty_ipums <- poverty_ipums %>% 
   mutate(ZCTA = substring(ZCTA_NAME, 7)) %>%
-  filter(ZCTA %in% zcta_cali) %>%
+  filter(ZCTA %in% buffer2_perim_vec) %>%
   mutate(Pct_Agg = as.numeric(Pct_Agg)) %>%
   mutate(Pct_Agg_P = round(Pct_Agg, 2)) %>%
   mutate(Poverty_Dummy_75 = case_when(Pct_Agg >= 11.415 ~ 'Pov>75', TRUE ~ 'Pov<75')) %>%
@@ -288,7 +289,7 @@ industry_ipums <- read_csv("data/industry_ipums_2015_2019/industry_ipums.csv")
 
 industry_ipums <- industry_ipums %>%
   mutate(ZCTA = substring(NAME_E, 7)) %>%
-  filter(ZCTA %in% zcta_cali) %>%
+  filter(ZCTA %in% buffer2_perim_vec) %>%
   mutate(Pct_Agg = as.numeric(Pct_Agg)) %>%
   mutate(Pct_Agg = round(Pct_Agg, 2)) %>% 
   mutate(Pct_Agg_I = ifelse(is.na(Pct_Agg), 0, Pct_Agg)) %>%
@@ -303,4 +304,16 @@ industry_ipums <- industry_ipums %>%
 ## Inner join to Main Percent Change August
 pct_chg_aug <- pct_chg_aug %>%
   inner_join(., industry_ipums, by = c("zcta" = "ZCTA")) 
+
+## Descriptives + Adding External
+
+com <- com %>%
+  inner_join(., ruca, by = c('zcta' = 'zcta')) %>%
+  inner_join(., industry_ipums, by = c('zcta' = 'ZCTA')) %>%
+  inner_join(., poverty_ipums, by = c('zcta' = 'ZCTA')) %>%
+  distinct(Agr_Dummy_75, Poverty_Dummy_75, Rural_Dummy_R, zcta, fire_cat) %>%
+  inner_join(., com, by = c('zcta' = 'zcta')) %>%
+  mutate(fire_cat = fire_cat.x)
+
+
 

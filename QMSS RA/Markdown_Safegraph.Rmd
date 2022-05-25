@@ -2,7 +2,13 @@
 title: "SafeGraph Mobility EDA Markdown"
 author: "Andrew Lai"
 date: "30/04/2022"
-output: html_document
+output:   
+  html_document:
+    toc: yes
+    df_print: paged
+  html_notebook:
+    toc: yes
+    theme: spacelab
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +26,7 @@ rm(list=ls()[! ls() %in% c("rural_ipums","ruca", "subset_glass",
                            "industry_ipums", "aug_combined", 
                            "buffer1_vec","buffer2_perim_vec", 
                            "buffer2_vec", "cf_bf1", "cf_bf2", "gfperimvec",
-                           "not_zcta", "rural_ruca", "zcta_cali", 
+                           "not_zcta", "rural_ruca", 
                            '%notin%', 'pp1', 'pp2', 'aug_combined', 'com')])
 ```
 
@@ -42,23 +48,28 @@ The Glass Fire was fully contained on October 20, 2020, after burning over 67,48
 
 
 ## Data Tables (Descriptives)
-```{r}
-DT::datatable(com %>%
-  distinct(fire_cat, zcta) %>%
-  group_by(fire_cat) %>%
-  summarize(total_zcta = n())
-  )
-```
+
+
+Fire Category | Total ZCTA
+------------- | -------------
+GF            | 8
+BF1           | 17
+BF2           | 10
+
+
 Using shape files from the GlassFire, 10 km buffers were used to create the first buffer (BF1), 10km surrounding BF1 creates the second buffer (BF2).
 
 Each perimeter has unique ZCTA that is exclusive to their perimeter.  
+
 
 ```{r}
 DT::datatable(com %>%
                 filter(june != 'June') %>%
                 mutate(new_date = as.POSIXct(strptime(date_range_start, "%Y-%m-%d"))) %>%
                 mutate(week = as_date(new_date)) %>%
-                group_by(city, zcta, week, fire_cat) %>%
+                group_by(city, zcta, week, fire_cat, 
+                         Poverty_Dummy_75, Agr_Dummy_75,
+                         Rural_Dummy_R) %>%
                 summarize(sum_visit = sum(raw_visit_counts), .groups = 'drop'), 
               caption = 'Descriptive Statistics of August Mobility', 
               filter = "top",
@@ -72,8 +83,10 @@ DT::datatable(com %>%
                 filter(june == 'June') %>%
                 mutate(new_date = as.POSIXct(strptime(date_range_start, "%Y-%m-%d"))) %>%
                 mutate(week = as_date(new_date)) %>%
-                group_by(city, zcta, week, fire_cat) %>%
-                summarize(sum_visit = sum(raw_visit_counts), .groups = 'drop'), 
+                group_by(city, zcta, week, fire_cat, 
+                         Poverty_Dummy_75, Agr_Dummy_75,
+                         Rural_Dummy_R)  %>%
+              summarize(sum_visit = sum(raw_visit_counts), .groups = 'drop'), 
               caption = 'Descriptive Statistics of June Mobility', 
               filter = "top",
               extensions = c("SearchPanes", "Select", "Buttons"),
@@ -84,6 +97,7 @@ DT::datatable(com %>%
 
 
 ### Percent Change Using Fire Category and June as Baseline
+
 
 ```{r}
 pct_chg_aug %>%
@@ -97,14 +111,15 @@ pct_chg_aug %>%
   ylim(-50,200) +
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +# week of Oct 12
   theme(axis.text.x = element_text(angle = 0)) + 
-  labs(x="Date", y="Median Percent Change") +
+  labs(x="Date", y="Median Percent Change (Divide by 100)") +
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"))  +
     annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
            ymin = -50.00, ymax = 150.00 ,
-             alpha = 0, color= "orange")
+             alpha = 0, color= "orange") +
+  ggtitle("Percent Change Mobility by Fire Category")
 ```
 
 When looking at mobility:
@@ -124,7 +139,82 @@ BF1           | 0.03
 BF2           | 0.04
 
 
+
+### Percent Change of Mobility by Rural/ Fire Category and June as Baseline
+
+Rural Category | Total ZCTA
+------------- | -------------
+Rural         | 11
+Urban         | 24
+
+```{r}
+pct_chg_aug %>%
+  na.omit() %>%
+  group_by(week,zcta,Rural_Dummy_R, fire_cat) %>%
+  summarize(med = median(pct_chg_mon_f), .groups = 'drop') %>%
+  ggplot(data =., aes(x = week, y = med, group = zcta)) +
+  scale_color_manual(values=c('Blue','Green', 'Red')) +
+  geom_line(aes(colour=Rural_Dummy_R), alpha = 0.2) +
+  geom_point(aes(colour = Rural_Dummy_R), alpha = 0.8) +
+  ylim(-50,200) +
+  scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +# week of Oct 12
+  theme(axis.text.x = element_text(angle = 0)) + 
+  labs(x="Date", y="Median Percent Change (Divide by 100") + 
+  facet_wrap(vars(fire_cat), nrow = 3) +
+  ggtitle("Percent Change Mobility by Fire Category and Rural")
+```
+
+
+```{r}
+pct_chg_aug %>%
+  na.omit() %>%
+  group_by(week,zcta, fire_cat) %>%
+  group_by(Rural_Dummy_R, week, fire_cat) %>%
+  summarize(med = median(pct_chg_mon_f), .groups ='drop') %>%
+  ggplot(data =., aes(x = week, y = med, group = Rural_Dummy_R)) +
+  scale_color_manual(values=c('Blue','Green', 'Red')) +
+  geom_line(aes(colour=Rural_Dummy_R)) +
+  geom_point(size = 2) +
+  scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12")))  +# week of Oct 12
+  theme(axis.text.x = element_text(angle = 0)) + facet_wrap(vars(fire_cat), nrow = 3) +ylim(-50,50) +
+  ggtitle("Percent Change Mobility by Fire Category and Rural (Collapsed)") +
+  labs(x="Date", y="Median Percent Change (Divide by 100") 
+```
+
+```{r}
+pct_chg_aug %>%
+  na.omit() %>%
+  group_by(week,zcta) %>%
+  group_by(Rural_Dummy_R, week, fire_cat) %>%
+  filter(fire_cat == 'GF') %>%
+  summarize(med = median(pct_chg_mon_f), .groups ='drop') %>%
+  ggplot(data =., aes(x = week, y = med, group = Rural_Dummy_R)) +
+  scale_color_manual(values=c('Blue','Green', 'Red')) +
+  geom_line(aes(colour=Rural_Dummy_R)) +
+  geom_point(size = 2) +
+  scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +# week of Oct 12
+  theme(axis.text.x = element_text(angle = 0)) + 
+  labs(x="Date", y="Median Percent Change (Divide by 100)") +
+  theme(panel.grid.major = element_blank(), 
+        panel.grid.minor = element_blank(),
+        panel.background = element_blank(), 
+        axis.line = element_line(colour = "black"))  +
+    annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
+           ymin = -20, ymax = 60 ,
+             alpha = 0, color= "orange") +
+  ggtitle("Median Raw Visits by Date (GF/Collapsed)")
+```
+
+
+
 ### Percent Change of Mobility by Agriculture/ Fire Category and June as Baseline
+
+
+Agr Category   | Total ZCTA
+-------------  | -------------
+Agr<75         | 26
+Agr>75         | 9
+
 ```{r}
 pct_chg_aug %>%
   na.omit() %>%
@@ -185,6 +275,16 @@ pct_chg_aug %>%
 
 
 ### Percent Change of Mobility by Poverty/ Fire Category and June as Baseline
+
+
+Pov Category   | Total ZCTA
+-------------  | -------------
+Pov<75         | 26
+Pov>75         | 9
+
+
+
+
 ```{r}
 pct_chg_aug %>%
   na.omit() %>%
@@ -243,5 +343,70 @@ pct_chg_aug %>%
 
 ### Looking at PM25 Levels 
 
+#### Grouped by Rural/Urban
+```{r}
+pct_chg_aug %>%
+  na.omit() %>%
+  inner_join(., subset_glass, by = c('zcta' = 'zcta', 'week' = 'date')) %>%
+  select(zcta, fire_cat, week, PM25, wf_pm25_imp, bins, pct_chg_mon_z, Rural_Dummy_R) %>%
+  group_by(week,zcta) %>%
+  arrange(zcta) %>%
+  ggplot(data = ., aes(x = week, y = PM25, 
+                               color = Rural_Dummy_R)) +
+  geom_point(aes(color = Rural_Dummy_R), alpha = .5) +
+  scale_color_manual(values=c('Blue','Green')) +
+  geom_smooth(se = F) + 
+  scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +
+  labs(title="PM25 Values by Date and Category") +
+  labs(x="Date", y="PM25 Values") +
+  labs(color='Nation')  +
+  annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
+           ymin = 0, ymax = 100 ,
+             alpha = 0, color= "orange")  + facet_wrap(vars(fire_cat), nrow = 3)
+```
 
+#### Grouped by Agricultural
+```{r}
+pct_chg_aug %>%
+  na.omit() %>%
+  inner_join(., subset_glass, by = c('zcta' = 'zcta', 'week' = 'date')) %>%
+  select(zcta, fire_cat, week, PM25, wf_pm25_imp, bins, pct_chg_mon_z, Agr_Dummy_75) %>%
+  group_by(week,zcta) %>%
+  arrange(zcta) %>%
+  ggplot(data = ., aes(x = week, y = PM25, 
+                               color = Agr_Dummy_75)) +
+  geom_point(aes(color = Agr_Dummy_75), alpha = .5) +
+  scale_color_manual(values=c('Blue','Green')) +
+  geom_smooth(se = F) + 
+  scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +
+  labs(title="PM25 Values by Date and Category") +
+  labs(x="Date", y="PM25 Values") +
+  labs(color='Nation')  +
+  annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
+           ymin = 0, ymax = 100 ,
+             alpha = 0, color= "orange")  + facet_wrap(vars(fire_cat), nrow = 3)
+```
+
+
+#### Grouped by Poverty
+```{r}
+pct_chg_aug %>%
+  na.omit() %>%
+  inner_join(., subset_glass, by = c('zcta' = 'zcta', 'week' = 'date')) %>%
+  select(zcta, fire_cat, week, PM25, wf_pm25_imp, bins, pct_chg_mon_z, Poverty_Dummy_75) %>%
+  group_by(week,zcta) %>%
+  arrange(zcta) %>%
+  ggplot(data = ., aes(x = week, y = PM25, 
+                               color = Poverty_Dummy_75)) +
+  geom_point(aes(color = Poverty_Dummy_75), alpha = .5) +
+  scale_color_manual(values=c('Blue','Green')) +
+  geom_smooth(se = F) + 
+  scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +
+  labs(title="PM25 Values by Date and Category") +
+  labs(x="Date", y="PM25 Values") +
+  labs(color='Nation')  +
+  annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
+           ymin = 0, ymax = 100 ,
+             alpha = 0, color= "orange")  + facet_wrap(vars(fire_cat), nrow = 3)
+```
 
