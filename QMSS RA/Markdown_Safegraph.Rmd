@@ -159,7 +159,7 @@ pct_chg_aug %>%
   ylim(-50,200) +
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +# week of Oct 12
   theme(axis.text.x = element_text(angle = 0)) + 
-  labs(x="Date", y="Median Percent Change (Divide by 100") + 
+  labs(x="Date", y="Median Percent Change (Divide by 100)") + 
   facet_wrap(vars(fire_cat), nrow = 3) +
   ggtitle("Percent Change Mobility by Fire Category and Rural")
 ```
@@ -178,7 +178,7 @@ pct_chg_aug %>%
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12")))  +# week of Oct 12
   theme(axis.text.x = element_text(angle = 0)) + facet_wrap(vars(fire_cat), nrow = 3) +ylim(-50,50) +
   ggtitle("Percent Change Mobility by Fire Category and Rural (Collapsed)") +
-  labs(x="Date", y="Median Percent Change (Divide by 100") 
+  labs(x="Date", y="Median Percent Change (Divide by 100)") 
 ```
 
 ```{r}
@@ -227,7 +227,9 @@ pct_chg_aug %>%
   ylim(-50,200) +
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +# week of Oct 12
   theme(axis.text.x = element_text(angle = 0)) + 
-  labs(x="Date", y="Median Percent Change") + facet_wrap(vars(fire_cat), nrow = 3)
+  labs(x="Date", y="Median Percent Change (Divide by 100)") + 
+  facet_wrap(vars(fire_cat), nrow = 3) + 
+  ggtitle("Percent Change Mobility by Fire Category and Agr Industry")
 ```
 
 ```{r}
@@ -243,7 +245,9 @@ pct_chg_aug %>%
   geom_point(size = 2) +
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12")))  +# week of Oct 12
 
-  theme(axis.text.x = element_text(angle = 0)) + facet_wrap(vars(fire_cat), nrow = 3) +ylim(-50,50)
+  theme(axis.text.x = element_text(angle = 0)) + facet_wrap(vars(fire_cat), nrow = 3) +ylim(-50,50) +
+  ggtitle("Percent Change Mobility by Fire Category and Agr (Collapsed)") + 
+  labs(x="Date", y="Median Percent Change (Divide by 100)") 
 ```
 
 
@@ -261,15 +265,15 @@ pct_chg_aug %>%
   geom_point(size = 2) +
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +# week of Oct 12
   theme(axis.text.x = element_text(angle = 0)) + 
-  labs(x="Date", y="Median Percent Change") +
+  labs(x="Date", y="Median Percent Change (Divide by 100)") +
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"))  +
     annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
            ymin = -20, ymax = 60 ,
-             alpha = 0, color= "orange")
-  ggtitle("Median Raw Visits by Date") 
+             alpha = 0, color= "orange")+
+  ggtitle("Median Raw Visits by Date (GF/Collapsed)")
 ```
 
 
@@ -297,7 +301,9 @@ pct_chg_aug %>%
   ylim(-50,200) +
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +# week of Oct 12
   theme(axis.text.x = element_text(angle = 0)) + 
-  labs(x="Date", y="Median Percent Change") + facet_wrap(vars(fire_cat), nrow = 3)
+  labs(x="Date", y="Median Percent Change (Divide by 100)") + 
+  facet_wrap(vars(fire_cat), nrow = 3) + 
+  ggtitle("Percent Change Mobility by Fire Category and Poverty Status")
 ```
 
 ```{r}
@@ -313,7 +319,10 @@ pct_chg_aug %>%
   geom_point(size = 2) +
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12")))  +# week of Oct 12
 
-  theme(axis.text.x = element_text(angle = 0)) + facet_wrap(vars(fire_cat), nrow = 3) + ylim(-75,100)
+  theme(axis.text.x = element_text(angle = 0)) + 
+  facet_wrap(vars(fire_cat), nrow = 3) + ylim(-75,100) +
+  labs(x="Date", y="Median Percent Change (Divide by 100)") + 
+  ggtitle("Percent Change Mobility by Fire Category and Pov (Collapsed)") 
 ```
 
 
@@ -330,15 +339,15 @@ pct_chg_aug %>%
   geom_point(size = 2) +
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +# week of Oct 12
   theme(axis.text.x = element_text(angle = 0)) + 
-  labs(x="Date", y="Median Percent Change") +
+  labs(x="Date", y="Median Percent Change (Divide by 100)") +
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(),
         panel.background = element_blank(), 
         axis.line = element_line(colour = "black"))  +
     annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
            ymin = -25, ymax = 60 ,
-             alpha = 0, color= "orange")
-  ggtitle("Median Raw Visits by Date")
+             alpha = 0, color= "orange") +
+  gtitle("Median Raw Visits by Date (GF/Collapsed)")
 ```
 
 ### Looking at PM25 Levels 
@@ -357,7 +366,7 @@ pct_chg_aug %>%
   scale_color_manual(values=c('Blue','Green')) +
   geom_smooth(se = F) + 
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +
-  labs(title="PM25 Values by Date and Category") +
+  labs(title="PM25 Values by Date and Rural Status") +
   labs(x="Date", y="PM25 Values") +
   labs(color='Nation')  +
   annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
@@ -379,7 +388,7 @@ pct_chg_aug %>%
   scale_color_manual(values=c('Blue','Green')) +
   geom_smooth(se = F) + 
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +
-  labs(title="PM25 Values by Date and Category") +
+  labs(title="PM25 Values by Date and Industry") +
   labs(x="Date", y="PM25 Values") +
   labs(color='Nation')  +
   annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
@@ -402,7 +411,7 @@ pct_chg_aug %>%
   scale_color_manual(values=c('Blue','Green')) +
   geom_smooth(se = F) + 
   scale_x_date(breaks = "1 week", limits = as.Date(c("2020-08-31", "2020-10-12"))) +
-  labs(title="PM25 Values by Date and Category") +
+  labs(title="PM25 Values by Date and Poverty Status") +
   labs(x="Date", y="PM25 Values") +
   labs(color='Nation')  +
   annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
