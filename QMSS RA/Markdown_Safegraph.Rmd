@@ -1,7 +1,7 @@
 ---
 title: "SafeGraph Mobility EDA Markdown"
 author: "Andrew Lai"
-date: "30/04/2022"
+date: "26/05/2022"
 output:   
   html_document:
     toc: yes
@@ -123,11 +123,16 @@ pct_chg_aug %>%
 ```
 
 When looking at mobility:
+
   + Week of June 6, 2020 to the week of June 22, 2020 is used as a baseline
+  
   + Percent change is calculated by week to week in each consecutive week in June 
+  
   + The median of percent change is then grouped by fire category in June and is then officially the
   baseline for August mobility
+  
   + Then the percent change of August is then used for each consecutive week in August (August 31 - October 12)
+  
   + A calculation of percent change is taken by using the weekly percentage change for August in relation to the fire category median percent change.  
 
 
@@ -163,6 +168,14 @@ pct_chg_aug %>%
   facet_wrap(vars(fire_cat), nrow = 3) +
   ggtitle("Percent Change Mobility by Fire Category and Rural")
 ```
+
+Using RUCA (Rural/Urban Commuting Codes) to classify what is urban/rural in a aggregated status.
+
+https://depts.washington.edu/uwruca/ruca-uses.php
+https://www.ers.usda.gov/data-products/rural-urban-commuting-area-codes/documentation/
+
+
+
 
 
 ```{r}
@@ -231,6 +244,11 @@ pct_chg_aug %>%
   facet_wrap(vars(fire_cat), nrow = 3) + 
   ggtitle("Percent Change Mobility by Fire Category and Agr Industry")
 ```
+
+Sum of ZCTA that have (Counts of under 0.5 and 0.5 - 0.99) / Total Count. This is coded as a new variable (Percentage Agg). Then to code which ZCTA in subset are in the upper quartile of agriculture - we split percentages up by quartile.  Those that are in top 25% (5.725%) are dummy coded as upper quartile of Agriculture in subset.
+
+
+
 
 ```{r}
 # Agriculture BY Fire Cat
@@ -305,6 +323,12 @@ pct_chg_aug %>%
   facet_wrap(vars(fire_cat), nrow = 3) + 
   ggtitle("Percent Change Mobility by Fire Category and Poverty Status")
 ```
+Sum of ZCTA that have (Counts of under 0.5 and 0.5 - 0.99) / Total Count 
+
+Find Quartile - Those that are in top 25% (11.415%) are dummy coded as upper quartile in subset.
+
+
+
 
 ```{r}
 # Poverty BY Fire Cat
@@ -347,10 +371,12 @@ pct_chg_aug %>%
     annotate("rect", xmin = as.Date("2020-09-21"), xmax = as.Date("2020-10-12"), 
            ymin = -25, ymax = 60 ,
              alpha = 0, color= "orange") +
-  gtitle("Median Raw Visits by Date (GF/Collapsed)")
+  ggtitle("Median Raw Visits by Date (GF/Collapsed)")
 ```
 
 ### Looking at PM25 Levels 
+
+
 
 #### Grouped by Rural/Urban
 ```{r}
